@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa de Indicação — Castello Forte Barbearia</title>
+  <meta name="description" content="Indique amigos para a Castello Forte Barbearia e ganhe 20% de cashback por cada plano fechado. Exclusivo para assinantes." />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #F0F0F0;
+      color: #111;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 36px 24px 28px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #C9A84C;
+      color: #111;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span { color: #C9A84C; }
+    .hero p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #aaa;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .card-titulo {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 16px;
+    }
+
+    .passos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .passo {
+      background: #F7F7F7;
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .passo .num {
+      font-size: 28px;
+      font-weight: 900;
+      color: #C9A84C;
+      line-height: 1;
+    }
+    .passo .titulo {
+      font-size: 12px;
+      font-weight: 700;
+      color: #111;
+      margin: 6px 0 4px;
+    }
+    .passo .desc {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ── BENEFÍCIOS ── */
+    .beneficios {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .ben-col { border-radius: 10px; overflow: hidden; }
+    .ben-col .ben-hdr {
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .ben-col.voce .ben-hdr { background: #111; color: #C9A84C; }
+    .ben-col.amigo .ben-hdr { background: #2A2A2A; color: #C9A84C; }
+    .ben-col .ben-body { background: #F7F7F7; padding: 12px; }
+    .ben-item {
+      font-size: 11px;
+      color: #333;
+      line-height: 1.6;
+      padding: 2px 0;
+    }
+    .ben-item::before { content: "✓  "; color: #C9A84C; font-weight: 700; }
+
+    /* ── REGRAS ── */
+    .regras-lista { list-style: none; }
+    .regras-lista li {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+      padding: 7px 0;
+      border-bottom: 1px solid #F0F0F0;
+      display: flex;
+      gap: 10px;
+    }
+    .regras-lista li:last-child { border-bottom: none; }
+    .regras-lista li .icone { color: #C9A84C; font-weight: 700; flex-shrink: 0; }
+
+    /* ── FORM ── */
+    .form-card { background: #111; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+    .form-card .card-titulo { color: #C9A84C; }
+    .form-card .subtitulo { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+
+    .form-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #2A2A2A;
+    }
+    .form-section-label:first-of-type { margin-top: 0; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 420px) { .form-row { grid-template-columns: 1fr; } }
+
+    .field { margin-bottom: 10px; }
+    .field label {
+      display: block;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .field input {
+      width: 100%;
+      background: #1C1C1C;
+      border: 1.5px solid #2D2D2D;
+      border-radius: 8px;
+      padding: 11px 13px;
+      color: #fff;
+      font-size: 14px;
+      transition: border-color 0.2s;
+      outline: none;
+      font-family: inherit;
+    }
+    .field input::placeholder { color: #555; }
+    .field input:focus { border-color: #C9A84C; }
+
+    .indicado-bloco {
+      background: #1A1A1A;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #2A2A2A;
+    }
+    .indicado-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #C9A84C;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .indicado-num span {
+      background: #C9A84C;
+      color: #111;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 6px;
+      font-size: 11px;
+    }
+
+    .opcional-tag {
+      font-size: 10px;
+      background: #2A2A2A;
+      color: #888;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
+      font-weight: 400;
+    }
+
+    /* ── Botão enviar ── */
+    .btn-enviar {
+      width: 100%;
+      background: #C9A84C;
+      color: #111;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      margin-top: 20px;
+      transition: background 0.2s, transform 0.1s, opacity 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-enviar:hover:not(:disabled) { background: #D4B55A; }
+    .btn-enviar:active:not(:disabled) { transform: scale(0.98); }
+    .btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Spinner */
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(0,0,0,0.2);
+      border-top-color: #111;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn-enviar.loading .spinner { display: inline-block; }
+    .btn-enviar.loading .btn-text { display: none; }
+
+    /* ── BANNER DE ERRO GLOBAL ── */
+    .banner-erro {
+      display: none;
+      background: #2C1010;
+      border: 1px solid #E74C3C;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      color: #E74C3C;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* ── SUCESSO ── */
+    .sucesso {
+      display: none;
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px 24px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .sucesso .icone-ok { font-size: 48px; margin-bottom: 16px; }
+    .sucesso h2 { font-size: 20px; color: #111; margin-bottom: 8px; }
+    .sucesso p { font-size: 14px; color: #666; line-height: 1.6; }
+
+    /* ── RODAPÉ ── */
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      padding: 16px;
+    }
+
+    /* Erro de validação */
+    .field input.erro { border-color: #E74C3C; }
+    .msg-erro { font-size: 11px; color: #E74C3C; margin-top: 4px; display: none; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">✂ Programa Exclusivo</div>
+  <h1>Indique amigos e<br><span>ganhe de volta</span></h1>
+  <p>Exclusivo para assinantes. Indique até 5 amigos e receba 20% de cashback por cada plano fechado.</p>
+</div>
+
+<div class="container">
+
+  <!-- COMO FUNCIONA -->
+  <div class="card">
+    <div class="card-titulo">Como funciona</div>
+    <div class="passos">
+      <div class="passo">
+        <div class="num">1</div>
+        <div class="titulo">Indique</div>
+        <div class="desc">Preencha o formulário abaixo com o nome e telefone dos seus amigos.</div>
+      </div>
+      <div class="passo">
+        <div class="num">2</div>
+        <div class="titulo">Seu amigo ganha</div>
+        <div class="desc">Entraremos em contato oferecendo 1 corte grátis — como presente seu.</div>
+      </div>
+      <div class="passo">
+        <div class="num">3</div>
+        <div class="titulo">Ele fecha o plano</div>
+        <div class="desc">Se ele assinar qualquer plano da barbearia...</div>
+      </div>
+      <div class="passo">
+        <div class="num">4</div>
+        <div class="titulo">Você ganha</div>
+        <div class="desc">20% do valor do plano dele é descontado na sua próxima fatura.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFÍCIOS -->
+  <div class="card">
+    <div class="card-titulo">O que você ganha</div>
+    <div class="beneficios">
+      <div class="ben-col voce">
+        <div class="ben-hdr">PARA VOCÊ</div>
+        <div class="ben-body">
+          <div class="ben-item">Até 5 indicações</div>
+          <div class="ben-item">20% de cashback</div>
+          <div class="ben-item">Desconto automático na fatura</div>
+          <div class="ben-item">Quanto mais indica, mais economiza</div>
+        </div>
+      </div>
+      <div class="ben-col amigo">
+        <div class="ben-hdr">PARA SEU AMIGO</div>
+        <div class="ben-body">
+          <div class="ben-item">Contato da nossa equipe</div>
+          <div class="ben-item">1 corte grátis de presente</div>
+          <div class="ben-item">Sem compromisso</div>
+          <div class="ben-item">Atendimento VIP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGRAS -->
+  <div class="card">
+    <div class="card-titulo">Regras do programa</div>
+    <ul class="regras-lista">
+      <li><span class="icone">✔</span> Válido apenas para assinantes ativos de qualquer plano.</li>
+      <li><span class="icone">✔</span> Limite de <strong>5 indicações</strong> por assinante.</li>
+      <li><span class="icone">✔</span> O cashback de <strong>20%</strong> é aplicado somente após o indicado fechar e pagar o 1º mês do plano.</li>
+      <li><span class="icone">✔</span> O desconto é aplicado automaticamente na sua próxima fatura.</li>
+      <li><span class="icone">✔</span> O corte gratuito para o indicado é válido por <strong>30 dias</strong> após o contato.</li>
+    </ul>
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <div class="form-card" id="formCard">
+    <div class="card-titulo">Fazer minhas indicações</div>
+    <div class="subtitulo">Preencha seus dados e de até 5 amigos. Cuidaremos de todo o resto!</div>
+
+    <form id="formIndicacao" novalidate>
+
+      <div class="form-section-label">Seus dados</div>
+      <div class="form-row">
+        <div class="field">
+          <label for="nome_assinante">SEU NOME COMPLETO *</label>
+          <input type="text" id="nome_assinante" name="nome_assinante" placeholder="Ex: João Silva" required />
+          <div class="msg-erro">Campo obrigatório</div>
+        </div>
+        <div class="field">
+          <label for="tel_assinante">SEU WHATSAPP *</label>
+          <input type="tel" id="tel_assinante" name="tel_assinante" placeholder="(11) 99999-0000" required />
+          <div class="msg-erro">Campo obrigatório</div>
+        </div>
+      </div>
+
+      <!-- Indicados -->
+      <div id="indicados">
+
+        <div class="form-section-label">Indicado 1</div>
+        <div class="indicado-bloco">
+          <div class="form-row">
+            <div class="field">
+              <label for="ind1_nome">NOME DO AMIGO *</label>
+              <input type="text" id="ind1_nome" name="ind1_nome" placeholder="Ex: Pedro Alves" required />
+              <div class="msg-erro">Campo obrigatório</div>
+            </div>
+            <div class="field">
+              <label for="ind1_tel">WHATSAPP DO AMIGO *</label>
+              <input type="tel" id="ind1_tel" name="ind1_tel" placeholder="(11) 99999-0000" required />
+              <div class="msg-erro">Campo obrigatório</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-label">Indicado 2 <span class="opcional-tag">opcional</span></div>
+        <div class="indicado-bloco">
+          <div class="form-row">
+            <div class="field">
+              <label for="ind2_nome">NOME DO AMIGO</label>
+              <input type="text" id="ind2_nome" name="ind2_nome" placeholder="Ex: Carlos Lima" />
+            </div>
+            <div class="field">
+              <label for="ind2_tel">WHATSAPP DO AMIGO</label>
+              <input type="tel" id="ind2_tel" name="ind2_tel" placeholder="(11) 99999-0000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-label">Indicado 3 <span class="opcional-tag">opcional</span></div>
+        <div class="indicado-bloco">
+          <div class="form-row">
+            <div class="field">
+              <label for="ind3_nome">NOME DO AMIGO</label>
+              <input type="text" id="ind3_nome" name="ind3_nome" placeholder="Ex: Lucas Souza" />
+            </div>
+            <div class="field">
+              <label for="ind3_tel">WHATSAPP DO AMIGO</label>
+              <input type="tel" id="ind3_tel" name="ind3_tel" placeholder="(11) 99999-0000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-label">Indicado 4 <span class="opcional-tag">opcional</span></div>
+        <div class="indicado-bloco">
+          <div class="form-row">
+            <div class="field">
+              <label for="ind4_nome">NOME DO AMIGO</label>
+              <input type="text" id="ind4_nome" name="ind4_nome" placeholder="Ex: Marcos Costa" />
+            </div>
+            <div class="field">
+              <label for="ind4_tel">WHATSAPP DO AMIGO</label>
+              <input type="tel" id="ind4_tel" name="ind4_tel" placeholder="(11) 99999-0000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-label">Indicado 5 <span class="opcional-tag">opcional</span></div>
+        <div class="indicado-bloco">
+          <div class="form-row">
+            <div class="field">
+              <label for="ind5_nome">NOME DO AMIGO</label>
+              <input type="text" id="ind5_nome" name="ind5_nome" placeholder="Ex: Rafael Nunes" />
+            </div>
+            <div class="field">
+              <label for="ind5_tel">WHATSAPP DO AMIGO</label>
+              <input type="tel" id="ind5_tel" name="ind5_tel" placeholder="(11) 99999-0000" />
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /indicados -->
+
+      <!-- Banner de erro global -->
+      <div class="banner-erro" id="bannerErro">
+        ⚠️ Ocorreu um erro ao enviar suas indicações. Por favor, tente novamente em instantes.
+      </div>
+
+      <button type="submit" id="btnEnviar" class="btn-enviar">
+        <div class="spinner"></div>
+        <span class="btn-text">✂ ENVIAR MINHAS INDICAÇÕES</span>
+      </button>
+
+    </form>
+  </div>
+
+  <!-- MENSAGEM DE SUCESSO -->
+  <div class="sucesso" id="sucesso">
+    <div class="icone-ok">✂️</div>
+    <h2>Indicações enviadas!</h2>
+    <p>Obrigado! Em breve nossa equipe entrará em contato com seus amigos e eles receberão o corte grátis de presente seu.<br><br>O cashback de 20% será aplicado automaticamente na sua próxima fatura após cada plano fechado.</p>
+  </div>
+
+  <footer>Programa de Indicação — Exclusivo para Assinantes<br>Sujeito a alterações. Válido enquanto vigente.</footer>
+
+</div><!-- /container -->
+
+<script>
+  // ──────────────────────────────────────────────────────────
+  //  URL do Google Apps Script (Web App)
+  //  Após publicar o code.gs, cole a URL aqui:
+  // ──────────────────────────────────────────────────────────
+  var SCRIPT_URL = "COLE_AQUI_A_URL_DO_WEB_APP";
+
+  // ── Máscara de telefone ──────────────────────────────────
+  document.querySelectorAll('input[type="tel"]').forEach(function(el) {
+    el.addEventListener('input', function() {
+      var v = el.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 10) {
+        v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      } else if (v.length > 6) {
+        v = '(' + v.slice(0,2) + ') ' + v.slice(2,6) + '-' + v.slice(6);
+      } else if (v.length > 2) {
+        v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      } else if (v.length > 0) {
+        v = '(' + v;
+      }
+      el.value = v;
+    });
+  });
+
+  // ── Validação e envio ────────────────────────────────────
+  document.getElementById('formIndicacao').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Valida campos obrigatórios
+    var valido = true;
+    this.querySelectorAll('[required]').forEach(function(campo) {
+      var msgErro = campo.nextElementSibling;
+      if (!campo.value.trim()) {
+        campo.classList.add('erro');
+        if (msgErro) msgErro.style.display = 'block';
+        valido = false;
+      } else {
+        campo.classList.remove('erro');
+        if (msgErro) msgErro.style.display = 'none';
+      }
+    });
+    if (!valido) return;
+
+    // Esconde banner de erro anterior
+    document.getElementById('bannerErro').style.display = 'none';
+
+    // Estado de carregamento
+    var btn = document.getElementById('btnEnviar');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    // Coleta os dados
+    var form = this;
+    var dados = {
+      nome_assinante: form.nome_assinante.value.trim(),
+      tel_assinante:  form.tel_assinante.value.trim(),
+      ind1_nome: form.ind1_nome.value.trim(), ind1_tel: form.ind1_tel.value.trim(),
+      ind2_nome: form.ind2_nome.value.trim(), ind2_tel: form.ind2_tel.value.trim(),
+      ind3_nome: form.ind3_nome.value.trim(), ind3_tel: form.ind3_tel.value.trim(),
+      ind4_nome: form.ind4_nome.value.trim(), ind4_tel: form.ind4_tel.value.trim(),
+      ind5_nome: form.ind5_nome.value.trim(), ind5_tel: form.ind5_tel.value.trim(),
+    };
+
+    // Envia para o Google Apps Script
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',           // Apps Script exige no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    })
+    .then(function() {
+      // no-cors não retorna body — consideramos sucesso ao não rejeitar
+      mostrarSucesso();
+    })
+    .catch(function(err) {
+      console.error('Erro ao enviar:', err);
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      document.getElementById('bannerErro').style.display = 'block';
+    });
+  });
+
+  function mostrarSucesso() {
+    document.getElementById('formCard').style.display = 'none';
+    var s = document.getElementById('sucesso');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
