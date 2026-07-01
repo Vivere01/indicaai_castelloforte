@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🪒 Indica Aí — Castello Forte Barbearia
 
 Formulário web do **Programa de Indicação** da Castello Forte Barbearia.  
@@ -83,3 +84,6 @@ O formulário é um arquivo HTML estático — pode ser hospedado em:
 - O Apps Script deve ser publicado com acesso **"Qualquer pessoa"** para aceitar envios sem login.
 - Por usar `mode: 'no-cors'` no fetch, o navegador não lê a resposta do servidor — o envio é considerado bem-sucedido ao não gerar erro de rede.
 - Mantenha a URL do script em segredo para evitar abusos.
+=======
+# indicaai_castelloforte
+>>>>>>> a296be9f9eb9ac7f75b308382ddc0beae2370334
