@@ -189,6 +189,29 @@
     .field input::placeholder { color: #555; }
     .field input:focus { border-color: #C9A84C; }
 
+    .field select {
+      width: 100%;
+      background: #1C1C1C;
+      border: 1.5px solid #2D2D2D;
+      border-radius: 8px;
+      padding: 11px 13px;
+      color: #fff;
+      font-size: 14px;
+      transition: border-color 0.2s;
+      outline: none;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23C9A84C' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      cursor: pointer;
+    }
+    .field select option { background: #1C1C1C; color: #fff; }
+    .field select option[value=''] { color: #555; }
+    .field select:focus { border-color: #C9A84C; }
+    .field select.erro { border-color: #E74C3C; }
+
     .indicado-bloco {
       background: #1A1A1A;
       border-radius: 10px;
@@ -396,6 +419,16 @@
           <div class="msg-erro">Campo obrigatório</div>
         </div>
       </div>
+      <div class="field">
+        <label for="unidade">UNIDADE *</label>
+        <select id="unidade" name="unidade" required>
+          <option value="">Selecione sua unidade...</option>
+          <option value="Rio das Ostras">Rio das Ostras</option>
+          <option value="Cabo Frio">Cabo Frio</option>
+          <option value="Búzios">Búzios</option>
+        </select>
+        <div class="msg-erro">Selecione uma unidade</div>
+      </div>
 
       <!-- Indicados -->
       <div id="indicados">
@@ -530,7 +563,10 @@
     var valido = true;
     this.querySelectorAll('[required]').forEach(function(campo) {
       var msgErro = campo.nextElementSibling;
-      if (!campo.value.trim()) {
+      var vazio = (campo.tagName === 'SELECT')
+        ? campo.value === ''
+        : !campo.value.trim();
+      if (vazio) {
         campo.classList.add('erro');
         if (msgErro) msgErro.style.display = 'block';
         valido = false;
@@ -554,6 +590,7 @@
     var dados = {
       nome_assinante: form.nome_assinante.value.trim(),
       tel_assinante:  form.tel_assinante.value.trim(),
+      unidade:        form.unidade.value,
       ind1_nome: form.ind1_nome.value.trim(), ind1_tel: form.ind1_tel.value.trim(),
       ind2_nome: form.ind2_nome.value.trim(), ind2_tel: form.ind2_tel.value.trim(),
       ind3_nome: form.ind3_nome.value.trim(), ind3_tel: form.ind3_tel.value.trim(),
