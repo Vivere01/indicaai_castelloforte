@@ -13,7 +13,7 @@
 // ============================================================
 
 // ── Configurações ──────────────────────────────────────────
-var SPREADSHEET_ID      = "1uun-641r9XMwCLrcrrDT0h-Iurh0_kP_VipnsjKQ_IY";
+var SPREADSHEET_ID      = "1lbFXxsPdTBYZ0MFeJKfs__P-qnwr7ve65SSSIXdximo";
 
 // Aba 1 — Resumo de envios (uma linha por assinante que enviou)
 var ABA_INDICACOES      = "Indicações";

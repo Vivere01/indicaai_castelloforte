@@ -45,7 +45,7 @@ O script cria automaticamente uma aba chamada **"Indicações"** na planilha com
 | Data/Hora | Nome Assinante | WhatsApp Assinante | Indicado 1 — Nome | Indicado 1 — WhatsApp | ... | Status |
 |---|---|---|---|---|---|---|
 
-> A planilha utilizada: `1uun-641r9XMwCLrcrrDT0h-Iurh0_kP_VipnsjKQ_IY`
+> A planilha utilizada: `1lbFXxsPdTBYZ0MFeJKfs__P-qnwr7ve65SSSIXdximo`
 
 ---
 
